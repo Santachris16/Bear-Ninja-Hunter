@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Coding Assignment 6 - JS: Input & Output with BNH</title>
+  </head>
+<body>
+    <!-- Placeholder for the game result -->
+    <p id="gameResult">Welcome to the game! Your result will appear here.</p>
+
+    <!-- JavaScript code to execute gameplay -->
+    <script>
+        // 1. Prompt the player to enter their name
+        let playerName = prompt("Welcome to the game! Please enter your name:");
+
+        alert("Hello " + playerName + "! Let's start the game.");
+
+        // 3. Prompt the player's choice (bear, ninja, or bear)
+        let playerChoice = prompt("What is your choice? Type 'bear', 'ninja', or 'hunter'");
+
+        // 4. computer choice (always bear for now)
+        let computerChoice = "bear";
+
+        // 5. Display the results
+        let gameResult = `${playerName}, you chose ${playerChoice}. The computer chose ${computerChoice}.`;
+
+        // Output the result on the HTML page
+        document.getElementById("gameResult").innerHTML = gameResult;
+
+        // Log the result to the console
+        console.log(gameResult);
+    </script>
+</body>
+ 
+</html>
