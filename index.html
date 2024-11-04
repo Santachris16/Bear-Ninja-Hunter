@@ -1,37 +1,79 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Coding Assignment 6 - JS: Input & Output with BNH</title>
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bear-Ninja-Hunter Game</title>
+    <style>
+        /* Add some basic styling */
+        body { font-family: Arial, sans-serif; }
+        #gameResult { font-weight: bold; color: blue; }
+    </style>
+</head>
 <body>
-    <!-- Game result -->
-    <p id="gameResult">Welcome to the game! Your result will appear here.</p>
+    <!-- Placeholder for game result -->
+    <p id="gameResult">Welcome to Bear-Ninja-Hunter! Your result will appear here.</p>
 
-    <!-- JavaScript code to execute gameplay -->
     <script>
-        // 1. Prompt the player to enter their name
-        let playerName = prompt("Welcome to the game! Please enter your name:");
-
+        // 1. Prompt player for their name
+        let playerName = prompt("Welcome to Bear-Ninja-Hunter! Please enter your name:");
+        
+        // 2. Greet the player with a personalized message
         alert("Hello " + playerName + "! Let's start the game.");
 
-        // 3. Prompt the player's choice (bear, ninja, or bear)
+        // 3. Prompt the player's choice
         let playerChoice = prompt("What is your choice? Type 'bear', 'ninja', or 'hunter'");
 
-        // 4. computer choice (always bear for now)
+        // 4. Hardcoded computer choice for this iteration
         let computerChoice = "bear";
 
-        // 5. Display the results
-        let gameResult = `${playerName}, you chose ${playerChoice}. The computer chose ${computerChoice}.`;
+        // 5. Variable to store the game result message
+        let resultMessage = `${playerName}, you chose ${playerChoice}. The computer chose ${computerChoice}. `;
 
-        // Output the result on the HTML page
-        document.getElementById("gameResult").innerHTML = gameResult;
+        // 6. Determine the game outcome based on player and computer choices
+        let outcome;
+        switch (playerChoice) {
+            case "bear":
+                switch (computerChoice) {
+                    case "bear": outcome = "tie"; break;      // Tie
+                    case "ninja": outcome = "win"; break;      // Player wins
+                    case "hunter": outcome = "lose"; break;    // Computer wins
+                }
+                break;
+            case "ninja":
+                switch (computerChoice) {
+                    case "bear": outcome = "lose"; break;     // Computer wins
+                    case "ninja": outcome = "tie"; break;     // Tie
+                    case "hunter": outcome = "win"; break;    // Player wins
+                }
+                break;
+            case "hunter":
+                switch (computerChoice) {
+                    case "bear": outcome = "win"; break;      // Player wins
+                    case "ninja": outcome = "lose"; break;    // Computer wins
+                    case "hunter": outcome = "tie"; break;    // Tie
+                }
+                break;
+            default:
+                outcome = "invalid"; // Handle unexpected input (for future iterations)
+        }
 
-        // Log the result to the console
-        console.log(gameResult);
+        // 7. Construct result message based on the outcome
+        if (outcome === "win") {
+            resultMessage += "Congratulations, you win!";
+        } else if (outcome === "lose") {
+            resultMessage += "Sorry, the computer wins this time.";
+        } else if (outcome === "tie") {
+            resultMessage += "It's a tie!";
+        } else {
+            resultMessage += "Invalid choice. Please refresh and try again.";
+        }
+
+        // 8. Output the result message to HTML and the console
+        document.getElementById("gameResult").innerHTML = resultMessage;
+        console.log(resultMessage);
+
     </script>
 </body>
- 
 </html>
+
