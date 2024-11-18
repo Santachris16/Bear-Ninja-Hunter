@@ -4,33 +4,92 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Coding Assignment 6 - JS: Input & Output with BNH</title>
+    <title>Coding Assignment 4 - JS: Arrays, Loops, Data Types with BNH</title>
   </head>
 <body>
     <!-- Game result -->
-    <p id="gameResult">Welcome to the game! Your result will appear here.</p>
+    <p id="gameResult">Welcome to BNH! Your result will appear here.</p>
 
     <!-- JavaScript code to execute gameplay -->
     <script>
-        // 1. Prompt the player to enter their name
-        let playerName = prompt("Welcome to the game! Please enter your name:");
+         // Store game choice options
+        const choices = ["Bear", "Ninja", "Hunter"];
+        let playAgain = true; // Flag to track if the player wants to continue
+        let totalGames = 0; // Counter for games played
+        let wins = 0; // Counter for player wins
+        let losses = 0; // Counter for computer wins
+        let ties = 0; // Counter for ties
 
-        alert("Hello " + playerName + "! Let's start the game.");
+        while (playAgain) {
+            // 1. Prompt the player to enter their name
+            const playerName = prompt("Welcome to Bear, Ninja, Hunter! Please enter your name:");
+            if (!playerName) {
+                alert("You must enter a name to play the game!");
+                break;
+            }
 
-        // 3. Prompt the player's choice (bear, ninja, or bear)
-        let playerChoice = prompt("What is your choice? Type 'bear', 'ninja', or 'hunter'");
+            alert(`Hello ${playerName}! Let's start the game.`);
 
-        // 4. computer choice (always bear for now)
-        let computerChoice = "bear";
+            // 2. Prompt the player's choice
+            let playerChoice = prompt("What is your choice? Type 'bear', 'ninja', or 'hunter'").toLowerCase();
 
-        // 5. Display the results
-        let gameResult = `${playerName}, you chose ${playerChoice}. The computer chose ${computerChoice}.`;
+            // 3. Validate player input
+            if (!choices.map(choice => choice.toLowerCase()).includes(playerChoice)) {
+                alert("Invalid input! Please enter Bear, Ninja, or Hunter.");
+                continue; // Restart the loop if input is invalid
+            }
 
-        // Output the result on the HTML page
-        document.getElementById("gameResult").innerHTML = gameResult;
+            // 4. Randomize computer choice
+            const randomIndex = Math.floor(Math.random() * choices.length);
+            const computerChoice = choices[randomIndex];
 
-        // Log the result to the console
-        console.log(gameResult);
+            // 5. Countdown in the console
+            console.log("Get ready!");
+            for (let i = 3; i >= 0; i--) {
+                console.log(i);
+            }
+
+            // 6. Determine the result
+            let result;
+            if (playerChoice === computerChoice.toLowerCase()) {
+                result = "It's a tie!";
+                ties++;
+            } else if (
+                (playerChoice === "bear" && computerChoice === "Ninja") ||
+                (playerChoice === "ninja" && computerChoice === "Hunter") ||
+                (playerChoice === "hunter" && computerChoice === "Bear")
+            ) {
+                result = `You win, ${playerName}!`;
+                wins++;
+            } else {
+                result = "Computer wins!";
+                losses++;
+            }
+
+            // Increment total games
+            totalGames++;
+
+            // 7. Display results in HTML and console
+            const gameResult = `
+                <p><strong>Game ${totalGames}:</strong></p>
+                <p>${playerName}'s Choice: ${playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1)}</p>
+                <p>Computer's Choice: ${computerChoice}</p>
+                <p>Result: ${result}</p>
+                <p>Total Games: ${totalGames}, Wins: ${wins}, Losses: ${losses}, Ties: ${ties}</p>
+            `;
+            document.getElementById("gameResult").innerHTML = gameResult;
+            console.log(gameResult);
+
+            // 8. Ask to play again
+            let replayChoice = prompt("Do you want to play again? (yes/no)").toLowerCase();
+            if (replayChoice === "no") {
+                alert("Thanks for playing! See you next time!");
+                playAgain = false;
+            } else if (replayChoice !== "yes") {
+                alert("Invalid input. Ending the game.");
+                playAgain = false;
+            }
+        }
     </script>
 </body>
  
